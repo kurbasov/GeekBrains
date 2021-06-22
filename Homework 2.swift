@@ -72,11 +72,34 @@ print(fibonachi(2))
 print(fibonachi(100))
 
 
+//Задание 6
 
+func isMultiple(_num: Int, of divider: Int) ->
+Bool {
+    return num % divider == 0
+}
 
+var integers: [Int] = []
 
+while integers.count != 10 {
+    integers.append(integers.count+2)
+}
 
+print(integers)
+var p: Int
+var index = 0
+while index < integers.count - 1 {
+    p = integers[index]
 
+    for num in integers {
+        print("num - \(num) ---- p = \(p)")
+        if (num != p) && isMultiple(num, of: p){
+            integers.remove(at:
+            integers.firstIndex(of: num)!)
+        }
+    }
+    index += 1
+}
 
 
 
