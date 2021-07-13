@@ -1,70 +1,80 @@
-// 1. Реализовать свой тип коллекции "очередь" (queue) с использованием дженериков.
-// 2. Добавить ему несколько методов высшего порядка, полезных для этой коллекции (пример: filter для массивов)
-// 3. Добавить свой subscript, который будет возвращать nil, в случае обращения к несуществующему индексу
+//1. Придумать класс, методы которого будут завершаться неудачей и возвращать либо значение либо ошибку error. Реализовать их вызов и обработать результат метода при помощи конструкции if let и guard let.
+//2. Придумать класс, методы которого будут выбрасывать ошибки. Реализуйте несколько throws-функций7 Вызовите их и обработайте результат вызова при помощи конструкции try/catch.
 
-
-struct queuer<Element: Comparable> {
-
-    var items = [Element]()
-
-    mutating func add (_ item: Element) {
-        items.append(item)
-    }
-
-
-    mutating func next() -> Element {
-        print("Next queue \(items.first!)")
-        return items.removeFirst()
-    }
-
-    func filter(item: Element) {
-        print("Find \(items.filter{$0 == item})")
-    }
-
-
-    mutating func propertySort() -> [Element] {
-        return items.sorted(by: >)
-    }
-
-
-    subscript (index: Int) -> Element? {
-        return (index < items.count ? items[index] : nil)
-    }
-
-
-    func printCount(){
-        print(items.count)
-    }
-
-
+enum shotGonError: Error {
+    case noBullets(bulletsneed: Int)
+    case noFreeGun
+    case noGun
 }
 
 
-
-var round = queuer<String>(items:["Nick"])
-round.add("Bob")
-round.add("Chris")
-round.add("Bill")
-
-print(round.items)
-print("Отсортированный: \(round.propertySort())")
-
-round.next()
-round.next()
-round.add("Mickael")
-print(round)
-round.filter(item: "Bill")
-round.printCount()
-
-print(round)
-print(round[3])
-print(round[1])
+struct Gun {
+    var bullets: Int
+    var gun: Int
+}
 
 
+class tirGuns {
+
+    var inventory = [
+        "AWP": Gun(bullets:10, gun:3),
+        "Glock-18": Gun(bullets: 20, gun: 7),
+        "AKM74": Gun(bullets: 40, gun: 17),
+        "AK47": Gun(bullets: 30, gun: 10),
+    ]
+
+    var gunBullets = 0
+    |
+    func errors(gunName name: String) throws {
+        guard let guns = inventory[name else {
+            throw shotGonError.noGun
+        }
+
+        guard guns.gun > 0 else {
+            throw shotGonError.noGun
+        }
+
+        guard guns.bullets <= gunBullets else {
+            throwGonError.noBullets(bulletsneed: guns.bullets - gunBullets)
+        }
+
+        gunBullets -= guns.bullets
+
+
+        var someGuns = guns
+        someGuns.bullets -= 1
+        inventory[name] = someGuns
+
+        print("Взял оружие \(name)")
+    }
+}
+
+
+let favoriteGun = [
+    "igor": "AWP",
+    "pavel": "Glock-18"
+    "oleg": "AKM74"
+]
+
+
+func voteGuntier(player: String, Guns: tirGuns) throws {
+
+    let playerName = favoriteGun[player] ?? "AK47"
+    try Guns.errors(gunName: playerName)
+}
+
+
+var player = tirGuns()
+player.gunBullets = 11
 
 
 
-
-
-
-
+do {
+    try voteGuntier(player: "igor", Guns: player)
+} catch shotGonError.noFreeGun {
+    print("Нет свободного оружия")
+} catch shotGonError.noGun {
+    print("В тире нет такого оружия")
+} catch shotGonError.noBullets(let bulletsNeed) {
+    print("Недостаточно патронов, нужно еще \(bulletsNeed) патронов.")
+}
