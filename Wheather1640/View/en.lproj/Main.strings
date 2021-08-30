@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "My APP"; ObjectID = "JEc-vL-ow9"; */
+"JEc-vL-ow9.text" = "My APP";
+
+/* Class = "UITextField"; text = "User"; ObjectID = "JMl-Wo-y6k"; */
+"JMl-Wo-y6k.text" = "User";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "dxI-xX-naq"; */
+"dxI-xX-naq.normalTitle" = "Button";
+
+/* Class = "UITextField"; text = "Password"; ObjectID = "wTh-tC-e1u"; */
+"wTh-tC-e1u.text" = "Password";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "xGk-EJ-NvO"; */
+"xGk-EJ-NvO.text" = "Title";
